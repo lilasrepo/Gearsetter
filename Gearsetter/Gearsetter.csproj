@@ -1,14 +1,15 @@
-<Project Sdk="Dalamud.NET.Sdk/13.0.0">
+<Project Sdk="Dalamud.NET.Sdk/14.0.1">
     <PropertyGroup>
-        <Version>4.0</Version>
+        <Version>4.1</Version>
+		<TargetFramework>net10.0-windows7.0</TargetFramework>
         <OutputPath>dist</OutputPath>
     </PropertyGroup>
 
-    <Import Project="..\LLib\LLib.targets"/>
-    <Import Project="..\LLib\RenameZip.targets"/>
+    <Import Project="..\LLib\LLib.targets" />
+    <Import Project="..\LLib\RenameZip.targets" />
 
     <ItemGroup>
-        <ProjectReference Include="..\LLib\LLib.csproj"/>
+        <ProjectReference Include="..\LLib\LLib.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -19,6 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Text.Json" Version="9.0.3" />
+      <PackageReference Include="System.Text.Json" Version="10.0.1" />
     </ItemGroup>
 </Project>

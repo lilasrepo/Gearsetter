@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using LLib.GameData;
 using Lumina.Excel.Sheets;
@@ -69,7 +69,7 @@ public sealed partial class LootProcessor
         {
             var archiveItems = _lumina.GetSubrowExcelSheet<ArchiveItem>()!.GetRow(coffer.AdditionalData.RowId);
             foreach (var archiveItem in archiveItems)
-                ItemSourcesById[(uint)archiveItem.Unknown0] = [coffer.RowId];
+                ItemSourcesById[(uint)archiveItem.Item.RowId] = [coffer.RowId];
         }
     }
 

@@ -1,16 +1,17 @@
-﻿<Project Sdk="Dalamud.NET.Sdk/13.0.0">
+﻿<Project Sdk="Dalamud.NET.Sdk/14.0.1">
     <PropertyGroup>
-        <TargetFramework>net9.0-windows</TargetFramework>
+		<TargetFramework>net10.0-windows7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
+        <LangVersion>14.0</LangVersion>
     </PropertyGroup>
 
-    <Import Project="..\LLib\LLib.targets"/>
+    <Import Project="..\LLib\LLib.targets" />
 
     <ItemGroup>
-        <Reference Include="Lumina"/>
-        <Reference Include="Lumina.Excel"/>
+        <Reference Include="Lumina" />
+        <Reference Include="Lumina.Excel" />
     </ItemGroup>
 
     <ItemGroup>

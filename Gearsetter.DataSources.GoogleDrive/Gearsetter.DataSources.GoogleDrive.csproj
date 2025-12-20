@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.Net.SDK">
+<Project Sdk="Microsoft.Net.SDK">
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0-windows7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Exe</OutputType>
