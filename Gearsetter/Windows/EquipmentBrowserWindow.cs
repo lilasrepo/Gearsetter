@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,6 +8,7 @@ using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
+using Dalamud.Interface.Windowing;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
@@ -26,6 +27,7 @@ internal sealed class EquipmentBrowserWindow : LWindow
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly GameDataHolder _dataHolder;
     private readonly IClientState _clientState;
+    private readonly IObjectTable _objectTable;
     private readonly IChatGui _chatGui;
     private readonly IDataManager _dataManager;
     private readonly string[] _classJobNames;
@@ -44,6 +46,7 @@ internal sealed class EquipmentBrowserWindow : LWindow
         IDalamudPluginInterface pluginInterface,
         GameDataHolder dataHolder,
         IClientState clientState,
+        IObjectTable objectTable,
         IChatGui chatGui,
         IDataManager dataManager)
         : base("Equipment Browser###GearsetterBrowser")
@@ -52,6 +55,7 @@ internal sealed class EquipmentBrowserWindow : LWindow
         _pluginInterface = pluginInterface;
         _dataHolder = dataHolder;
         _clientState = clientState;
+        _objectTable = objectTable;
         _chatGui = chatGui;
         _dataManager = dataManager;
         _classJobNames = dataHolder.ClassJobNames
@@ -74,8 +78,8 @@ internal sealed class EquipmentBrowserWindow : LWindow
 
     public override void OnOpen()
     {
-        if (_clientState.LocalPlayer != null)
-            _selectedClassJob = ((EClassJob)_clientState.LocalPlayer.ClassJob.RowId).AsJob();
+        if (_objectTable.LocalPlayer != null)
+            _selectedClassJob = ((EClassJob)_objectTable.LocalPlayer.ClassJob.RowId).AsJob();
 
         UpdateEquipmentCategories();
     }

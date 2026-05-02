@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
@@ -35,6 +35,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
     private readonly IDataManager _dataManager;
     private readonly IPluginLog _pluginLog;
     private readonly IClientState _clientState;
+    private readonly IObjectTable _objectTable;
     private readonly GearsetterIpc _gearsetterIpc;
     private readonly Configuration _configuration;
     private readonly GearStatsCalculator _gearStatsCalculator;
@@ -45,7 +46,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
     private readonly Dictionary<EClassJob, byte> _classJobToArrayIndex;
 
     public GearsetterPlugin(IDalamudPluginInterface pluginInterface, ICommandManager commandManager, IChatGui chatGui,
-        IDataManager dataManager, IPluginLog pluginLog, IClientState clientState)
+        IDataManager dataManager, IPluginLog pluginLog, IClientState clientState, IObjectTable objectTable)
     {
         ArgumentNullException.ThrowIfNull(dataManager);
 
@@ -55,6 +56,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
         _dataManager = dataManager;
         _pluginLog = pluginLog;
         _clientState = clientState;
+        _objectTable = objectTable;
         _gearsetterIpc = new GearsetterIpc(this, _pluginInterface, _pluginLog);
 
         Configuration? configuration = (Configuration?)_pluginInterface.GetPluginConfig();
@@ -67,7 +69,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
         _configuration = configuration;
         _gearStatsCalculator = new GearStatsCalculator(dataManager);
         _gameDataHolder = new GameDataHolder(dataManager, _configuration, _gearStatsCalculator);
-        _equipmentBrowserWindow = new EquipmentBrowserWindow(this, _pluginInterface, _gameDataHolder, _clientState, _chatGui, _dataManager);
+        _equipmentBrowserWindow = new EquipmentBrowserWindow(this, _pluginInterface, _gameDataHolder, _clientState, _objectTable, _chatGui, _dataManager);
         _windowSystem.AddWindow(_equipmentBrowserWindow);
         _configWindow = new ConfigWindow(_pluginInterface, _configuration);
         _windowSystem.AddWindow(_configWindow);
@@ -92,7 +94,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
             .ToDictionary(x => (EClassJob)x.RowId, x => (byte)x.ExpArrayIndex);
     }
 
-    private unsafe void TerritoryChanged(ushort territory)
+    private unsafe void TerritoryChanged(uint territory)
     {
         if (!_configuration.ShowRecommendationsWhenEnteringGcArea)
             return;
@@ -146,7 +148,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
             var gearset = gearsetModule->GetGearset(i);
             if (gearset != null && gearset->Flags.HasFlag(RaptureGearsetModule.GearsetFlag.Exists))
             {
-                if (onlyCurrentJob && gearset->ClassJob != _clientState.LocalPlayer!.ClassJob.RowId)
+                if (onlyCurrentJob && gearset->ClassJob != _objectTable.LocalPlayer!.ClassJob.RowId)
                     continue;
 
                 var gearsetData = PrepareGearset(gearset);

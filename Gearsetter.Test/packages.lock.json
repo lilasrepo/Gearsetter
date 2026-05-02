@@ -10,9 +10,9 @@
       },
       "DalamudPackager": {
         "type": "Direct",
-        "requested": "[14.0.1, )",
-        "resolved": "14.0.1",
-        "contentHash": "y0WWyUE6dhpGdolK3iKgwys05/nZaVf4ZPtIjpLhJBZvHxkkiE23zYRo7K7uqAgoK/QvK5cqF6l3VG5AbgC6KA=="
+        "requested": "[15.0.0, )",
+        "resolved": "15.0.0",
+        "contentHash": "411vwC8/X8Z/sQ2TI6v3SvOn66xFPeOjFn3Zn+h0d3Ox2t1kFm66AhDvmx/qcMwVrR+Hidxj0dadpQ2dgyXMBQ=="
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
@@ -56,11 +56,6 @@
         "requested": "[3.0.2, )",
         "resolved": "3.0.2",
         "contentHash": "oXbusR6iPq0xlqoikjdLvzh+wQDkMv9If58myz9MEzldS4nIcp442Btgs2sWbYWV+caEluMe2pQCZ0hUZgPiow=="
-      },
-      "ClientStructsExposed.UnknownFieldGenerator": {
-        "type": "Transitive",
-        "resolved": "0.1.3",
-        "contentHash": "z9dUcxmdAUEYBkCVUiysW5urzN6vz5AsGaL2KHic/jRj6TsNqO+WvADs1aJUKRtdgjpXJcaMqsBnp5NKtawgRw=="
       },
       "JetBrains.Annotations": {
         "type": "Transitive",
@@ -144,15 +139,14 @@
       "gearsetter": {
         "type": "Project",
         "dependencies": {
-          "ClientStructsExposed.UnknownFieldGenerator": "[0.1.3, )",
-          "DalamudPackager": "[14.0.1, )",
+          "DalamudPackager": "[15.0.0, )",
           "LLib": "[1.1.0, )"
         }
       },
       "llib": {
         "type": "Project",
         "dependencies": {
-          "DalamudPackager": "[14.0.1, )",
+          "DalamudPackager": "[15.0.0, )",
           "JetBrains.Annotations": "[2024.3.0, )"
         }
       }

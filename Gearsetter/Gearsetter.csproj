@@ -1,6 +1,6 @@
-<Project Sdk="Dalamud.NET.Sdk/14.0.1">
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
     <PropertyGroup>
-        <Version>4.1</Version>
+        <Version>4.3</Version>
 		<TargetFramework>net10.0-windows7.0</TargetFramework>
         <OutputPath>dist</OutputPath>
     </PropertyGroup>
@@ -20,6 +20,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Text.Json" Version="10.0.1" />
+      <PackageReference Include="System.Text.Json" Version="10.0.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="DotNet.ReproducibleBuilds" Version="2.0.2" />
+      <PackageReference Update="Microsoft.SourceLink.Gitea" Version="10.0.203" />
     </ItemGroup>
 </Project>
