@@ -83,7 +83,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
             HelpMessage = "Toggle the equipment browser window"
         });
         _linkPayloads = Enumerable.Range(0, 100)
-            .ToDictionary(x => (byte)x, x => _chatGui.AddChatLinkHandler((byte)x, ChangeGearset)).AsReadOnly();
+            .ToDictionary(x => (byte)x, x => _pluginInterface.AddChatLinkHandler((uint)x, ChangeGearset)).AsReadOnly();
         _clientState.TerritoryChanged += TerritoryChanged;
         _pluginInterface.UiBuilder.Draw += _windowSystem.Draw;
         _pluginInterface.UiBuilder.OpenMainUi += _equipmentBrowserWindow.Toggle;
@@ -94,7 +94,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
             .ToDictionary(x => (EClassJob)x.RowId, x => (byte)x.ExpArrayIndex);
     }
 
-    private unsafe void TerritoryChanged(uint territory)
+    private unsafe void TerritoryChanged(ushort territory)
     {
         if (!_configuration.ShowRecommendationsWhenEnteringGcArea)
             return;
@@ -148,7 +148,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
             var gearset = gearsetModule->GetGearset(i);
             if (gearset != null && gearset->Flags.HasFlag(RaptureGearsetModule.GearsetFlag.Exists))
             {
-                if (onlyCurrentJob && gearset->ClassJob != _objectTable.LocalPlayer!.ClassJob.RowId)
+                if (onlyCurrentJob && gearset->ClassJob != _clientState.LocalPlayer!.ClassJob.RowId)
                     continue;
 
                 var gearsetData = PrepareGearset(gearset);
@@ -435,7 +435,7 @@ public sealed class GearsetterPlugin : IDalamudPlugin
         _pluginInterface.UiBuilder.OpenMainUi -= _equipmentBrowserWindow.Toggle;
         _pluginInterface.UiBuilder.Draw -= _windowSystem.Draw;
         _clientState.TerritoryChanged -= TerritoryChanged;
-        _chatGui.RemoveChatLinkHandler();
+        _pluginInterface.RemoveChatLinkHandler();
         _commandManager.RemoveHandler("/gbrowser");
         _commandManager.RemoveHandler("/gup");
         _gearsetterIpc.Dispose();

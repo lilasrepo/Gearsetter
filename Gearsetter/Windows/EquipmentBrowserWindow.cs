@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
-using Dalamud.Bindings.ImGui;
+using ImGuiNET;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Interface;
@@ -78,8 +78,8 @@ internal sealed class EquipmentBrowserWindow : LWindow
 
     public override void OnOpen()
     {
-        if (_objectTable.LocalPlayer != null)
-            _selectedClassJob = ((EClassJob)_objectTable.LocalPlayer.ClassJob.RowId).AsJob();
+        if (_clientState.LocalPlayer != null)
+            _selectedClassJob = ((EClassJob)_clientState.LocalPlayer.ClassJob.RowId).AsJob();
 
         UpdateEquipmentCategories();
     }

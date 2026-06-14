@@ -1,6 +1,0 @@
-﻿/.idea
-*.user
-
-bin/
-obj/
-Gearsetter.DataSources.GoogleDrive/api_credentials.json
