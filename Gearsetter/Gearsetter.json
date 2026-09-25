@@ -1,0 +1,14 @@
+{
+  "Name": "Gearsetter",
+  "Author": "Liza Carvelli",
+  "DalamudApiLevel": 13,
+  "AssemblyVersion": "4.3.0.0",
+  "Punchline": "Find gear upgrades",
+  "Description": "Browse through all gear pieces available for each class/job and show possible upgrades",
+  "RepoUrl": "https://git.carvel.li/liza/Gearsetter",
+  "IconUrl": "https://plugins.carvel.li/icons/Gearsetter.png",
+  "Tags": [
+    "gearset",
+    "gearsets"
+  ]
+}
